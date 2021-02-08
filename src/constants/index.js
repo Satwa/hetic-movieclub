@@ -1,3 +1,7 @@
+import React from 'react'
+import { TouchableOpacity } from 'react-native'
+import { FontAwesome } from '@expo/vector-icons'
+
 export const MOVIEDB_API_BASE = 'https://api.themoviedb.org/3'
 export const MOVIEDB_API_KEY = '62f071d2521aba16cf7952ef57fd6e77'
 
@@ -26,3 +30,24 @@ export const GENERIC_STYLE = {
 		alignItems: 'center'
 	},
 }
+
+export const HEADER_OPTIONS = ({ navigation, route}) => ({
+	title: route.params.title,
+	headerStyle: {
+		backgroundColor: COLORS.red,
+		borderRadius: 24,
+		height: 150
+	},
+	headerLeft: () => (
+		<TouchableOpacity onPress={navigation.goBack} style={{ marginLeft: 12 }}>
+			<FontAwesome name="arrow-left" size={24} color={COLORS.green} />
+		</TouchableOpacity>
+	),
+	headerTintColor: COLORS.green,
+	headerTitleStyle: {
+		fontWeight: 'bold',
+		color: COLORS.green,
+		textTransform: 'uppercase',
+		fontSize: 24,
+	},
+})

@@ -25,7 +25,9 @@ export default HomeScreen = props => {
 					cardItem={GenreItem}
 					style={styles.list}
 					navigation={props.navigation}
-					goToScreen={ (item) => () => props.navigation.navigate('Genre', { title: item.title, id: item.id }) }
+					goToScreen={ (item) => {
+						props.navigation.navigate('Genre', { title: item.name, id: item.id }) 
+					}}
 				/>
 			</ScrollView>
 		</SafeAreaView>
