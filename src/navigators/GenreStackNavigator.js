@@ -17,7 +17,11 @@ export default GenreStackNavigator = () => {
 				name='Genre'
 				component={GenreScreen}
 				options={(navigation) => HEADER_OPTIONS(navigation)} />
-			<Stack.Screen name='MovieDetails' component={MovieDetailsScreen} />
+			<Stack.Screen
+				name='MovieDetails'
+				component={MovieDetailsScreen}
+				options={({ route }) => ({ title: route.params.title })}
+			/>
 		</Stack.Navigator>
 	)
 }

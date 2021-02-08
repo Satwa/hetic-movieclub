@@ -6,6 +6,7 @@ export default MovieItem = props => {
 	return (
 		<TouchableOpacity
 			style={styles.card}
+			onPress={props.showDetails}
 		>
 			<View style={styles.posterContent}>
 				<Image

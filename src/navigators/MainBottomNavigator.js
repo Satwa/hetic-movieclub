@@ -16,7 +16,6 @@ export default MainBottomNavigator = () => (
 			style: {
 				backgroundColor: COLORS.red
 			},
-			// activeBackgroundColor: 'yellow',
 			activeTabStyle: {
 				backgroundColor: 'blue'
 			}

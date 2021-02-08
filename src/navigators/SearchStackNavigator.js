@@ -9,7 +9,11 @@ export default SearchStackNavigator = () => {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen name='Search' component={SearchScreen} options={{ headerShown: false }} />
-			<Stack.Screen name='MovieDetails' component={MovieDetailsScreen} />
+			<Stack.Screen
+				name='MovieDetails'
+				component={MovieDetailsScreen}
+				options={({ route }) => ({ title: route.params.title })}
+			/>
 		</Stack.Navigator>
 	)
 }
