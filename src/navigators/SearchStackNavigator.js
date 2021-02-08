@@ -1,6 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import SearchScreen from '../screens/SearchScreen'
+import { MOVIEDETAILS_HEADER_OPTIONS } from '../constants'
 import MovieDetailsScreen from '../screens/MovieDetailsScreen'
 
 const Stack = createStackNavigator()
@@ -12,7 +13,7 @@ export default SearchStackNavigator = () => {
 			<Stack.Screen
 				name='MovieDetails'
 				component={MovieDetailsScreen}
-				options={({ route }) => ({ title: route.params.title })}
+				options={(navigation) => MOVIEDETAILS_HEADER_OPTIONS(navigation)}
 			/>
 		</Stack.Navigator>
 	)

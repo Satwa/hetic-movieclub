@@ -51,3 +51,17 @@ export const HEADER_OPTIONS = ({ navigation, route}) => ({
 		fontSize: 24,
 	},
 })
+
+export const MOVIEDETAILS_HEADER_OPTIONS = ({ navigation, route }) => ({
+	headerStyle: {
+		backgroundColor: 'transparent',
+	},
+	headerShown: true,
+	headerTransparent: true,
+	headerLeft: () => (
+		<TouchableOpacity onPress={navigation.goBack} style={{ marginLeft: 12 }}>
+			<FontAwesome name="arrow-left" size={24} color={COLORS.red} />
+		</TouchableOpacity>
+	),
+	title: ''
+})

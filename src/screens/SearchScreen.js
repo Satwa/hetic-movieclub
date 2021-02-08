@@ -74,7 +74,7 @@ export default SearchScreen = props => {
 			</View>
 
 			{
-				movies.results.length > 0 ? (
+				movies.results && movies.results.length > 0 ? (
 					<InfiniteList
 						payload={movies.results}
 						cardItem={MovieItem}
