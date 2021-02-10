@@ -8,7 +8,7 @@ export const MOVIEDB_API_KEY = '62f071d2521aba16cf7952ef57fd6e77'
 export const COLORS = {
 	red: '#B00020',
 	green: '#B5A90F',
-	dark: '#0000000',
+	dark: '#000000',
 	light: '#FFFFFF',
 	background: '#F4F4F4'
 }

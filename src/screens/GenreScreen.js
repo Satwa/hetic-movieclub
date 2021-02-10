@@ -3,13 +3,19 @@ import { COLORS, GENERIC_STYLE } from '../constants'
 import { Text, SafeAreaView, ScrollView, Image, StyleSheet, Button, Linkedin, Animated } from 'react-native'
 import { getMoviesByGenre } from '../services/endpoints'
 import MovieItem from '../components/MovieItem'
+import LoadingIndicator from '../components/LoadingIndicator'
 
 export default GenreScreen = props => {
+	const [isLoading, setIsLoading] = useState(true)
 	const [movies, setMovies] = useState([])
 	const [page, setPage] = useState(1)
 
 	useMemo(async () => {
-		getMoviesByGenre(props.route.params.id).then(data => setMovies(data))
+		getMoviesByGenre(props.route.params.id)
+			.then(data => {
+				setMovies(data)
+				setIsLoading(false)
+			})
 	}, [])
 
 	const loadMore = async () => {
@@ -26,6 +32,9 @@ export default GenreScreen = props => {
 
 	return (
 		<SafeAreaView style={styles.page}>
+			{
+				isLoading && <LoadingIndicator />
+			}
 			<InfiniteList
 				payload={movies.results}
 				cardItem={MovieItem}

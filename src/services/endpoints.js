@@ -12,7 +12,11 @@ export const searchMovie = async (text, page) => {
 }
 
 export const getMovie = async (id) => {
-	const req = await fetch( formatUrl(`/movie/${id}`) )
+	const req = await fetch(
+		formatUrl(`/movie/${id}`, {
+			append_to_response: 'videos',
+		})
+	)
 
 	return await req.json()
 }

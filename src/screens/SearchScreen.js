@@ -62,6 +62,7 @@ export default SearchScreen = props => {
 					<View style={styles.blank}></View>
 					<TouchableOpacity
 						onPress={() => loadMore(true)}
+						activeOpacity={0.8}
 						style={styles.button}
 					>
 						{

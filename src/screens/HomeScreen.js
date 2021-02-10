@@ -4,16 +4,25 @@ import GenreItem from '../components/GenreItem'
 import InfiniteList from '../components/InfiniteList'
 import { COLORS, GENERIC_STYLE } from '../constants'
 import { getGenre } from '../services/endpoints'
+import LoadingIndicator from '../components/LoadingIndicator'
 
 export default HomeScreen = props => {
+	const [isLoading, setIsLoading] = useState(true)
 	const [genre, setGenre] = useState([])
 
 	useMemo(async () => {
-		getGenre().then(data => setGenre(data.genres))
+		getGenre()
+			.then(data => {
+				setGenre(data.genres)
+				setIsLoading(false)
+			})
 	}, [])
 
 	return (
 		<SafeAreaView style={styles.page}>
+			{
+				isLoading && <LoadingIndicator />
+			}
 			<ScrollView contentContainerStyle={styles.scrollView}>
 				<Image
 					source={ require('../../assets/logo.jpg') }
