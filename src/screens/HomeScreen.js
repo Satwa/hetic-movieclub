@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { Text, View, ScrollView, SafeAreaView, Image, StyleSheet, Button, Linkedin, Animated } from 'react-native'
 import GenreItem from '../components/GenreItem'
 import InfiniteList from '../components/InfiniteList'
-import { COLORS, GENERIC_STYLE } from '../constants'
+import { COLORS, GENERIC_STYLE, TRIGGER_ALERT } from '../constants'
 import { getGenre } from '../services/endpoints'
 import LoadingIndicator from '../components/LoadingIndicator'
 
@@ -14,6 +14,10 @@ export default HomeScreen = props => {
 		getGenre()
 			.then(data => {
 				setGenre(data.genres)
+				setIsLoading(false)
+			})
+			.catch(() => {
+				TRIGGER_ALERT(props.navigation)
 				setIsLoading(false)
 			})
 	}, [])

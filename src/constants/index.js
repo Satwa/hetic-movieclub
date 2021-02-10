@@ -1,8 +1,8 @@
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, Alert } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 
-export const MOVIEDB_API_BASE = 'https://api.themoviedb.org/3'
+export const MOVIEDB_API_BASE = 'https://dapi.themoviedb.org/3'
 export const MOVIEDB_API_KEY = '62f071d2521aba16cf7952ef57fd6e77'
 
 export const COLORS = {
@@ -65,3 +65,14 @@ export const MOVIEDETAILS_HEADER_OPTIONS = ({ navigation, route }) => ({
 	),
 	title: ''
 })
+
+export const TRIGGER_ALERT = (navigation) => {
+	return Alert.alert(
+		"Erreur",
+		"Une erreur est survenue lors du chargement des données. Veuillez vérifier votre accès Internet et réessayer.",
+		[
+			{ text: "OK", onPress: navigation.goBack }
+		],
+		{ cancelable: false }
+	)
+}

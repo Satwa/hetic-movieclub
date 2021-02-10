@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import { COLORS, GENERIC_STYLE } from '../constants'
+import React, { useState } from 'react'
+import { COLORS, GENERIC_STYLE, TRIGGER_ALERT } from '../constants'
 import { Text, SafeAreaView, View, ScrollView, Button, Image, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { searchMovie } from '../services/endpoints'
 import MovieItem from '../components/MovieItem'
@@ -22,20 +22,25 @@ export default SearchScreen = props => {
 		setIsLoading(true)
 
 		setPage(page + 1)
-		const _movies = await searchMovie(searchValue, page + 1)
-
-		if(_previousPage === 0 || isNewRequest) {
+		try {
+			const _movies = await searchMovie(searchValue, page + 1)
+	
+			if(_previousPage === 0 || isNewRequest) {
+				setIsLoading(false)
+				return await setMovies(_movies)
+			}
 			setIsLoading(false)
-			return await setMovies(_movies)
+			return await setMovies({
+				...movies,
+				results: [
+					...movies.results,
+					..._movies.results
+				]
+			})
+		}catch(err) {
+			TRIGGER_ALERT(props.navigation)
+			setIsLoading(false)
 		}
-		setIsLoading(false)
-		return await setMovies({
-			...movies,
-			results: [
-				...movies.results,
-				..._movies.results
-			]
-		})
 	}
 
 	return (

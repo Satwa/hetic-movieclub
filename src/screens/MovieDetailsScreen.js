@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { Text, ScrollView, View, Image, StyleSheet, Dimensions } from 'react-native'
 import { WebView } from 'react-native-webview'
 import LoadingIndicator from '../components/LoadingIndicator'
-import { COLORS } from '../constants'
+import { COLORS, TRIGGER_ALERT } from '../constants'
 import { getMovie } from '../services/endpoints'
 import { FontAwesome } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -23,6 +23,10 @@ export default MovieDetailsScreen = props => {
 					const trailer = data.videos.results.filter($0 => $0.type === 'Trailer')
 					youtubeKey = trailer.length > 0 ? trailer[0].key : data.videos.results[0].key
 				}
+				setIsLoading(false)
+			})
+			.catch(() => {
+				TRIGGER_ALERT(props.navigation)
 				setIsLoading(false)
 			})
 	}, [])

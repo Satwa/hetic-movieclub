@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { COLORS, GENERIC_STYLE } from '../constants'
-import { Text, SafeAreaView, ScrollView, Image, StyleSheet, Button, Linkedin, Animated } from 'react-native'
+import { COLORS, GENERIC_STYLE, TRIGGER_ALERT } from '../constants'
+import { SafeAreaView, ScrollView, Image, StyleSheet } from 'react-native'
 import { getMoviesByGenre } from '../services/endpoints'
 import MovieItem from '../components/MovieItem'
 import LoadingIndicator from '../components/LoadingIndicator'
@@ -10,24 +10,35 @@ export default GenreScreen = props => {
 	const [movies, setMovies] = useState([])
 	const [page, setPage] = useState(1)
 
+	
+
 	useMemo(async () => {
 		getMoviesByGenre(props.route.params.id)
 			.then(data => {
 				setMovies(data)
 				setIsLoading(false)
 			})
+			.catch(() => {
+				TRIGGER_ALERT(props.navigation)
+				setIsLoading(false)
+			})
 	}, [])
 
 	const loadMore = async () => {
-		const _movies = await getMoviesByGenre(props.route.params.id, page + 1)
-		setPage(page + 1)
-		return await setMovies({
-			...movies,
-			results: [
-				...movies.results,
-				..._movies.results
-			]
-		})
+		try {
+			const _movies = await getMoviesByGenre(props.route.params.id, page + 1)
+			setPage(page + 1)
+			return await setMovies({
+				...movies,
+				results: [
+					...movies.results,
+					..._movies.results
+				]
+			})
+		}catch(err) {
+			TRIGGER_ALERT(props.navigation)
+			setIsLoading(false)
+		}
 	}
 
 	return (

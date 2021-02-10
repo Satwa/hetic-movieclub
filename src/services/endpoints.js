@@ -8,6 +8,7 @@ export const searchMovie = async (text, page) => {
 		})
 	)
 
+	if(req.status !== 200) throw Error('Network issue')
 	return await req.json()
 }
 
@@ -18,11 +19,13 @@ export const getMovie = async (id) => {
 		})
 	)
 
+	if(req.status !== 200) throw Error('Network issue')
 	return await req.json()
 }
 
 export const getGenre = async () => {
 	const req = await fetch( formatUrl('/genre/movie/list'))
+	if(req.status !== 200) throw Error('Network issue')
 	return await req.json()
 }
 
@@ -35,5 +38,6 @@ export const getMoviesByGenre = async (id, page = 1) => {
 		})
 	)
 
+	if(req.status !== 200) throw Error('Network issue')
 	return await req.json()
 }
