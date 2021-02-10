@@ -2,7 +2,7 @@ import React from 'react'
 import { TouchableOpacity, Alert } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 
-export const MOVIEDB_API_BASE = 'https://dapi.themoviedb.org/3'
+export const MOVIEDB_API_BASE = 'https://api.themoviedb.org/3'
 export const MOVIEDB_API_KEY = '62f071d2521aba16cf7952ef57fd6e77'
 
 export const COLORS = {
